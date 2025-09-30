@@ -41,12 +41,6 @@ app.get('/flash', function(req, res){
   res.redirect('/');
 });
 ```
-
-## Examples
-
-For an example using express-flash-2 in an Express 4.x app, refer to the [express4](https://github.com/jack2gs/express-flash-2/tree/master/examples/express4)
-example.
-
 ## Tests
 
     $ npm install  
