@@ -27,7 +27,7 @@
   ],
   "main": "./lib",
   "scripts": {
-    "test": "./node_modules/.bin/mocha  test/*.test.js"
+    "test": "mocha \"test/*.test.js\""
   },
   "devDependencies": {
     "chai": "^4.3.6",
