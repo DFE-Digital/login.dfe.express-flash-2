@@ -21,15 +21,21 @@ pr:
 variables:
 - group: dsi-global
 
-
-stages:
-
 # Code Scans
-- stage: Codescan
-  displayName: "Scan tools"
-  jobs:
+stages:
+  - stage: prepare
+    displayName: Prepare
+    jobs:
+      - template: pipeline/node-project/checks.yml@devopsTemplates
+        parameters:
+          nodeVersionSpec: 22.11.0
 
-  - template:  pipeline/scanTools.yml@devopsTemplates
-    parameters:
-      npmInstCmd: 'install --force --json --no-package-lock'
-      AppDeploy: true
+  - stage: publishPackage
+    displayName: Publish Package
+    dependsOn:
+      - prepare
+    condition: in(dependencies.prepare.result, 'Succeeded', 'Skipped')
+    jobs:
+      - template: pipeline/node-project/publishPackage.yml@devopsTemplates
+        parameters:
+          nodeVersionSpec: 22.11.0
